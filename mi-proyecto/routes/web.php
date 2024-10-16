@@ -11,9 +11,7 @@ use App\Http\Controllers\controladorVistas;
 /*  Route::view('/','bienvenido')->name('inicio.index');
 
  Route::view('/formulario','formulario')->name('formulario.index');
-
 Route::view('/clientes', 'clientes')->name('clientes.index');
-
     shift + alt + a=comentar
  */ 
 
@@ -24,3 +22,5 @@ Route::get('/',[controladorVistas::class,'home'])->name('inicio.index');
 Route::get('/formulario',[controladorVistas::class,'formulario'])->name('formulario.index');
 
 Route::get('/clientes',[controladorVistas::class,'consulta'])->name('clientes.index');
+
+Route::post('/enviar',[controladorVistas::class,'procesarCliente'])->name('procesar');

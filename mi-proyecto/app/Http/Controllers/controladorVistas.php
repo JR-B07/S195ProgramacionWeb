@@ -17,5 +17,9 @@ class controladorVistas extends Controller
     public function consulta()
     {
          return view('clientes');
-            }
+    }
+    public function procesarCliente()
+    {
+        return 'llego tu formulario al controlador';
+    }
 }
