@@ -52,6 +52,7 @@
             <h3 class="highlight">GRUPO S-195</h3>
             <h2>PROGRAMACIÓN WEB</h2>
             <h2>JOSE RICARDO BECERRA COVARRUBIAS</h2>
+            <a href="{{ route('repaso1') }}" class="btn btn-primary btn-lg mt-3">REPASO1</a>
         </div>
     </div>
 
