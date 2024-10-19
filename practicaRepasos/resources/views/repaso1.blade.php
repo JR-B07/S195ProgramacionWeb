@@ -50,34 +50,34 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.getElementById('conversorForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+            e.preventDefault(); //envío del formulario 
             
-            const formData = new FormData(this);
+            const formData = new FormData(this);  //captura todos los datos del formulario
             
-            fetch('{{ route("convertido") }}', {
+            fetch('{{ route("convertido") }}', { //url ruta
                 method: 'POST',
                 headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    'X-Requested-With': 'XMLHttpRequest', //solicitud AJAX
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content //validacion de solicitud
                 },
-                body: formData
+                body: formData //Datos del formulario enviados al server
             })
             .then(response => {
-                if (!response.ok) {
-                    throw new Error('Error en la respuesta de la red');
+                if (!response.ok) { //verifica si la respuesta fue exitosa
+                    throw new Error('Error en la respuesta de la red'); 
                 }
                 return response.json();
             })
             .then(data => {
-                const resultadoDiv = document.getElementById('resultado');
+                const resultadoDiv = document.getElementById('resultado'); //verifica si la respuesta fue exitosa
                 resultadoDiv.textContent = data.resultado || 'Conversión no válida';
-                resultadoDiv.classList.remove('d-none', 'alert-danger');
-                resultadoDiv.classList.add('alert-info');
+                resultadoDiv.classList.remove('d-none', 'alert-danger'); //envio de alertas
+                resultadoDiv.classList.add('alert-info'); //informacion de alerta
             })
             .catch(error => {
-                console.error('Error:', error);
-                const resultadoDiv = document.getElementById('resultado');
-                resultadoDiv.textContent = 'Error al procesar la conversión. Inténtalo de nuevo más tarde.';
+                console.error('Error:', error); // Maneja cualquier error en la solicitud
+                const resultadoDiv = document.getElementById('resultado'); //imprime el error en la consola
+                resultadoDiv.textContent = 'Error al procesar la conversión. Inténtalo de nuevo más tarde.'; //Muestra un mensaje de error
                 resultadoDiv.classList.remove('d-none', 'alert-info');
                 resultadoDiv.classList.add('alert-danger');
             });

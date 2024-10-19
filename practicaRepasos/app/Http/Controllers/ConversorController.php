@@ -8,7 +8,7 @@ class ConversorController extends Controller
 {
     public function conversion()
     {
-        return view('conversor');
+        return view('repaso1');
     }
 
     public function convertir(Request $request)
@@ -24,8 +24,8 @@ class ConversorController extends Controller
 
         switch ($tipo) {
             case 'MB_to_GB':
-                $conversion = $valor / 1024;
-                $resultado = "{$valor} MB equivale a " . number_format($conversion, 2) . " GB";
+                $conversion = $valor / 1024; //conversion
+                $resultado = "{$valor} MB equivale a " . number_format($conversion, 2) . " GB"; // numberformat cambia el resultado y el 2 son los decimales que muestra
                 break;
 
             case 'GB_to_MB':
@@ -47,7 +47,7 @@ class ConversorController extends Controller
                 $resultado = "Tipo de conversión no válido";
         }
 
-        return response()->json([
+        return response()->json([ //lo muestra en json para no tener que recargar la pagina
             'resultado' => $resultado
         ]);
     }

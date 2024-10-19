@@ -5,11 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vista Diseño UPQ</title>
-    <!-- Enlace de Bootstrap CSS -->
+
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-    /* Estilo personalizado */
-    .container-custom {
+       .container-custom {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -30,14 +29,14 @@
         margin: 0;
     }
     .details-section h1 {
-        font-size: 2.5rem; /* Ajuste de tamaño para el primer renglón */
+        font-size: 2.5rem; 
     }
     .details-section h2 {
-        font-size: 2.2rem; /* Ajuste de tamaño para acercarlo al tamaño de h1 */
+        font-size: 2.2rem; 
         font-weight: bold;
     }
     .details-section h3{
-        color: #e67e22; /* Color del separador naranja */
+        color: #e67e22; 
     }
 </style>
 </head>
@@ -56,7 +55,6 @@
         </div>
     </div>
 
-    <!-- Enlace de Bootstrap JS y dependencias -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
