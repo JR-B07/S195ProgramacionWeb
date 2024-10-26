@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Cliente;
 
 class ClienteController extends Controller
 {
-    public function store(Request $request)
+    // Método para mostrar el formulario
+    public function create()
     {
-     
-        $request->validate([
-            'nombre' => 'required|string|max:255',
-            'apellido' => 'required|string|max:255',
-            'correo' => 'required|email',
-            'telefono' => 'required|numeric',
-        ]);
+        return view('clientes.index');
+    }
 
-        return redirect()->back()->with('success', 'Cliente registrado con éxito.');
+    // Método para procesar el formulario
+    public function store(validadorCliente $request)
+    {
+        Cliente::create($request->all());
+
+        return redirect()->back()->with('exito', 'Cliente registrado con éxito.');
     }
 }
