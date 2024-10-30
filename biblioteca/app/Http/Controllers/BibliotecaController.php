@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Libro;
 use Illuminate\Http\Request;
 
 class BibliotecaController extends Controller
 {
     public function index()
     {
-        return view('principal');
+        return view('Index');
     }
 
     public function registro()
@@ -28,6 +29,17 @@ class BibliotecaController extends Controller
             'editorial' => 'required|string',
             'email_editorial' => 'required|email'
         ]);
+
+        // Guardar el libro en la base de datos
+        $libro = new Libro();
+        $libro->isbn = $request->isbn;
+        $libro->titulo = $request->titulo;
+        $libro->autor = $request->autor;
+        $libro->paginas = $request->paginas;
+        $libro->anio = $request->anio;
+        $libro->editorial = $request->editorial;
+        $libro->email_editorial = $request->email_editorial;
+        $libro->save();
 
         // Mensaje de confirmación
         return redirect()->route('registro')->with('message', 'Todo correcto: Libro “' . $request->titulo . '” guardado');
