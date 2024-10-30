@@ -2,7 +2,7 @@
 @section('title', 'Registro de Libro')
 @section('content')
     <h2>Registrar un nuevo libro</h2>
-    <form action="" method="POST">
+    <form action="{{ route('guardarLibro') }}" method="POST">
         @csrf
         <div class="form-group">
             <label for="isbn">ISBN</label>

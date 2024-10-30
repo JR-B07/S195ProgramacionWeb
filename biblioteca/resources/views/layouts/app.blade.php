@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,14 +12,14 @@
 </head>
 <body>
      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="">Biblioteca</a>
+        <a class="navbar-brand" href="{{ route('principal') }}">Biblioteca</a>
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="">Inicio</a>
+                    <a class="nav-link" href="{{ route('principal') }}">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">Registrar Libro</a>
+                    <a class="nav-link" href="{{ route('registro') }}">Registrar Libro</a>
                 </li>
             </ul>
         </div>
