@@ -1,37 +1,34 @@
 @extends('layouts.app')
-@section('title', 'Registro de Libro')
+@section('title', __('libros.register'))
 
 @section('styles')
 <style>
     .field-container {
         margin-bottom: 1rem;
     }
-    /* Estilo específico para el mensaje de Bootstrap */
-    .form-control:invalid ~ .invalid-feedback,
-    .form-control:invalid ~ .invalid-tooltip,
-    .was-validated .form-control:invalid ~ .invalid-feedback,
-    .was-validated .form-control:invalid ~ .invalid-tooltip,
     .error-text {
         color: #FF0000 !important;
         font-size: 0.875rem;
         margin-top: 4px;
         display: block;
     }
-    /* Asegurarse que el mensaje sea visible */
-    .invalid-feedback {
-        display: block !important;
-        color: #FF0000 !important;
-    }
 </style>
 @endsection
 
 @section('content')
-    <h2>Registrar un nuevo libro</h2>
+    <!-- Botones de cambio de idioma -->
+    <a href="{{ route('language.change', 'es') }}" class="btn btn-primary">Español</a>
+    <a href="{{ route('language.change', 'en') }}" class="btn btn-secondary">English</a>
+
+
+    <h2>{{ __('Registro de Libros') }}</h2>
     
     <form action="{{ route('guardarLibro') }}" method="POST" class="needs-validation" novalidate>
         @csrf
+        
+        <!-- ISBN -->
         <div class="field-container">
-            <label for="isbn" class="form-label">ISBN</label>
+            <label for="isbn" class="form-label">{{ __('libros.isbn') }}</label>
             <input type="text" 
                    name="isbn" 
                    class="form-control @error('isbn') is-invalid @enderror" 
@@ -40,13 +37,14 @@
                    required>
             @error('isbn')
                 <span class="invalid-feedback error-text" role="alert">
-                    {{ $message }}
+                    {{ __('libros.validation.isbn_required') }}
                 </span>
             @enderror
         </div>
 
+        <!-- Título -->
         <div class="field-container">
-            <label for="titulo" class="form-label">Título</label>
+            <label for="titulo" class="form-label">{{ __('libros.title') }}</label>
             <input type="text" 
                    name="titulo" 
                    class="form-control @error('titulo') is-invalid @enderror" 
@@ -55,13 +53,14 @@
                    required>
             @error('titulo')
                 <span class="invalid-feedback error-text" role="alert">
-                    {{ $message }}
+                    {{ __('libros.validation.title_required') }}
                 </span>
             @enderror
         </div>
 
+        <!-- Autor -->
         <div class="field-container">
-            <label for="autor" class="form-label">Autor</label>
+            <label for="autor" class="form-label">{{ __('libros.author') }}</label>
             <input type="text" 
                    name="autor" 
                    class="form-control @error('autor') is-invalid @enderror" 
@@ -70,13 +69,14 @@
                    required>
             @error('autor')
                 <span class="invalid-feedback error-text" role="alert">
-                    {{ $message }}
+                    {{ __('libros.validation.author_required') }}
                 </span>
             @enderror
         </div>
 
+        <!-- Páginas -->
         <div class="field-container">
-            <label for="paginas" class="form-label">Páginas</label>
+            <label for="paginas" class="form-label">{{ __('libros.pages') }}</label>
             <input type="number" 
                    name="paginas" 
                    class="form-control @error('paginas') is-invalid @enderror" 
@@ -85,13 +85,14 @@
                    required>
             @error('paginas')
                 <span class="invalid-feedback error-text" role="alert">
-                    {{ $message }}
+                    {{ __('libros.validation.pages_required') }}
                 </span>
             @enderror
         </div>
 
+        <!-- Año -->
         <div class="field-container">
-            <label for="anio" class="form-label">Año</label>
+            <label for="anio" class="form-label">{{ __('libros.year') }}</label>
             <input type="number" 
                    name="anio" 
                    class="form-control @error('anio') is-invalid @enderror" 
@@ -100,13 +101,14 @@
                    required>
             @error('anio')
                 <span class="invalid-feedback error-text" role="alert">
-                    {{ $message }}
+                    {{ __('libros.validation.year_required') }}
                 </span>
             @enderror
         </div>
 
+        <!-- Editorial -->
         <div class="field-container">
-            <label for="editorial" class="form-label">Editorial</label>
+            <label for="editorial" class="form-label">{{ __('libros.publisher') }}</label>
             <input type="text" 
                    name="editorial" 
                    class="form-control @error('editorial') is-invalid @enderror" 
@@ -115,13 +117,14 @@
                    required>
             @error('editorial')
                 <span class="invalid-feedback error-text" role="alert">
-                    {{ $message }}
+                    {{ __('libros.validation.publisher_required') }}
                 </span>
             @enderror
         </div>
 
+        <!-- Email de la Editorial -->
         <div class="field-container">
-            <label for="email_editorial" class="form-label">Email de la Editorial</label>
+            <label for="email_editorial" class="form-label">{{ __('libros.publisher_email') }}</label>
             <input type="email" 
                    name="email_editorial" 
                    class="form-control @error('email_editorial') is-invalid @enderror" 
@@ -130,12 +133,12 @@
                    required>
             @error('email_editorial')
                 <span class="invalid-feedback error-text" role="alert">
-                    {{ $message }}
+                    {{ __('libros.validation.email_required') }}
                 </span>
             @enderror
         </div>
 
-        <button type="submit" class="btn btn-primary">Registrar Libro</button>
+        <button type="submit" class="btn btn-primary">{{ __('libros.register') }}</button>
     </form>
 
     <div class="alertify-container" id="alertify-container"></div>
@@ -146,7 +149,18 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             alertify.set('notifier','position', 'bottom-center');
-            alertify.success("{{ session('message') }}");
+            alertify.success("{{ __('LIBRO GUARDADO') }}");
+        });
+    </script>
+    @endpush
+@endif
+
+@if(session('error'))
+    @push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            alertify.set('notifier','position', 'bottom-center');
+            alertify.error("{{ __('alertify.error') }}");
         });
     </script>
     @endpush

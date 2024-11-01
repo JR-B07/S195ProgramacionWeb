@@ -30,6 +30,7 @@ class BibliotecaController extends Controller
             'email_editorial' => 'required|email'
         ]);
 
+
         // Guardar el libro en la base de datos
         $libro = new Libro();
         $libro->isbn = $request->isbn;

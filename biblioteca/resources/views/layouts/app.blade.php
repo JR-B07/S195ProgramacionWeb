@@ -27,6 +27,7 @@
             </ul>
         </div>
     </nav>
+    
 
     <div class="container mt-4">
         @yield('content')
