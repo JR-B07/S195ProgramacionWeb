@@ -1,62 +1,78 @@
 @extends('layouts.plantilla1')
 
-@section('titulo','Formulario')
+@section('titulo', 'Formulario')
 
 @section('contenido')
-    
-{{-- Inicia tarjeta --}}
-
-<div class="container mt-5">
-
+<div class="container mt-5 col-md-8">
     {{-- Mostrar mensajes de éxito --}}
     @if (session('exito'))
-        <x-Alert tipo="success"> {{ session('exito') }} </x-Alert>
+        <div class="alert alert-success">
+            {{ session('exito') }}
+        </div>
         <script>
             Swal.fire({
-                title: "Respuesta del servidor",
+                title: "Éxito",
                 text: "{{ session('exito') }}",
                 icon: "success"
             });
         </script>
     @endif
-    
+
+    {{-- Mostrar mensajes de error --}}
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+        <script>
+            Swal.fire({
+                title: "Error",
+                text: "{{ session('error') }}",
+                icon: "error"
+            });
+        </script>
+    @endif
+
     <div class="card">
         <div class="card-header">
             <h3>Registro de Clientes</h3>
         </div>
         <div class="card-body">
-            <form action="{{ route('procesar') }}" method="POST">  {{-- Usar la ruta nombrada --}}
-                @csrf  {{-- Protección contra CSRF --}}
-                
+            <form action="{{ route('procesar') }}" method="POST" class="form">
+                @csrf
+
                 <div class="mb-3">
-                    <label for="nombre" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" value="{{ old('nombre') }}">
-                    @error('nombre')
-                        <small class="text-danger fst-italic">{{ $message }}</small>
+                    <label for="txtnombre" class="form-label">Nombre:</label>
+                    <input type="text" class="form-control @error('txtnombre') is-invalid @enderror" 
+                           name="txtnombre" value="{{ old('txtnombre') }}">
+                    @error('txtnombre')
+                        <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
 
                 <div class="mb-3">
-                    <label for="apellido" class="form-label">Apellido</label>
-                    <input type="text" class="form-control" id="apellido" name="apellido" value="{{ old('apellido') }}">
-                    @error('apellido')
-                        <small class="text-danger fst-italic">{{ $message }}</small>
+                    <label for="txtapellido" class="form-label">Apellido:</label>
+                    <input type="text" class="form-control @error('txtapellido') is-invalid @enderror" 
+                           name="txtapellido" value="{{ old('txtapellido') }}">
+                    @error('txtapellido')
+                        <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
 
                 <div class="mb-3">
-                    <label for="correo" class="form-label">Correo</label>
-                    <input type="email" class="form-control" id="correo" name="correo" value="{{ old('correo') }}">
-                    @error('correo')
-                        <small class="text-danger fst-italic">{{ $message }}</small>
+                    <label for="txtcorreo" class="form-label">Correo:</label>
+                    <input type="email" class="form-control @error('txtcorreo') is-invalid @enderror" 
+                           name="txtcorreo" value="{{ old('txtcorreo') }}">
+                    @error('txtcorreo')
+                        <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
 
                 <div class="mb-3">
-                    <label for="telefono" class="form-label">Teléfono</label>
-                    <input type="text" class="form-control" id="telefono" name="telefono" value="{{ old('telefono') }}">
-                    @error('telefono')
-                        <small class="text-danger fst-italic">{{ $message }}</small>
+                    <label for="txttelefono" class="form-label">Teléfono:</label>
+                    <input type="tel" class="form-control @error('txttelefono') is-invalid @enderror" 
+                           name="txttelefono" value="{{ old('txttelefono') }}">
+                    @error('txttelefono')
+                        <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
 
@@ -64,8 +80,5 @@
             </form>
         </div>
     </div>
-</div>  
-
-{{-- Finaliza tarjeta --}}
-
+</div>
 @endsection

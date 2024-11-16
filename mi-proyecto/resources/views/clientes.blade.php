@@ -3,37 +3,32 @@
 @section('titulo', 'Clientes')
 
 @section('contenido')
+<div class="container mt-5 col-md-8">
 
-<div class="container">
-    <h1 class="my-4">Lista de Clientes</h1>
-
-    @if ($clientes->isEmpty())
-        <p>No hay clientes registrados.</p>
-    @else
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Correo</th>
-                    <th>Teléfono</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($clientes as $cliente)
-                <tr>
-                    <td>{{ $cliente->id }}</td>
-                    <td>{{ $cliente->nombre }}</td>
-                    <td>{{ $cliente->apellido }}</td>
-                    <td>{{ $cliente->correo }}</td>
-                    <td>{{ $cliente->telefono }}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+        @if (session('exito'))
+        <div class="alert alert-success">
+            {{ session('exito') }}
+        </div>
+        <script>
+            Swal.fire({
+                title: "Éxito",
+                text: "{{ session('exito') }}",
+                icon: "success"
+            });
+        </script>
     @endif
 
+    <div class="card text-justify font-monospace mt-3">
+        <!-- Muestra todos los clientes en formato de tarjeta -->
+        @foreach ($clientes as $cliente)
+            <div class="card-header fs-5 text-primary">
+                {{ $cliente->nombre }} {{ $cliente->apellido }}
+            </div>
+            <div class="card-body">
+                <h5 class="fw-bold">{{ $cliente->correo }}</h5>
+                <h5 class="fw-medium">{{ $cliente->telefono }}</h5>
+            </div>
+        @endforeach
+    </div>
 </div>
-
 @endsection

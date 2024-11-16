@@ -22,10 +22,10 @@ class validadorCliente extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre' => 'required|max:20',
-            'apellido' => 'required|max:50',
-            'correo' => 'required|email:rfc,dns',
-            'telefono' => 'required|numeric|digits_between:8,15'
+            'txtnombre' => 'required|max:20',
+            'txtapellido' => 'required|max:50',
+            'txtcorreo' => 'required|email',
+            'txttelefono' => 'required|numeric|digits_between:8,15'
         ];
     }
 
@@ -37,15 +37,15 @@ class validadorCliente extends FormRequest
     public function messages(): array
     {
         return [
-            'nombre.required' => 'El nombre es obligatorio',
-            'nombre.max' => 'El nombre no debe exceder 20 caracteres',
-            'apellido.required' => 'El apellido es obligatorio',
-            'apellido.max' => 'El apellido no debe exceder 50 caracteres',
-            'correo.required' => 'El correo es obligatorio',
-            'correo.email' => 'El correo debe ser una dirección válida',
-            'telefono.required' => 'El teléfono es obligatorio',
-            'telefono.numeric' => 'El teléfono debe contener solo números',
-            'telefono.digits_between' => 'El teléfono debe tener entre 8 y 15 dígitos'
+            'txtnombre.required' => 'El nombre es obligatorio',
+            'txtnombre.max' => 'El nombre no debe exceder 20 caracteres',
+            'txtapellido.required' => 'El apellido es obligatorio',
+            'txtapellido.max' => 'El apellido no debe exceder 50 caracteres',
+            'txtcorreo.required' => 'El correo es obligatorio',
+            'txtcorreo.email' => 'El correo debe ser una dirección válida',
+            'txttelefono.required' => 'El teléfono es obligatorio',
+            'txttelefono.numeric' => 'El teléfono debe contener solo números',
+            'txttelefono.digits_between' => 'El teléfono debe tener entre 8 y 15 dígitos'
         ];
     }
 }

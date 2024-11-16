@@ -11,7 +11,7 @@
     <div class="text-center">
         <h1 class="display-4">¡Bienvenido querido Turista!</h1>
         <p>Presiona el botón para iniciar tu aventura.</p>
-        <a href="{{ route('formulario.index') }}" class="btn btn-primary btn-lg mt-3">Iniciar</a>
+        <a href="{{ route('formulario') }}" class="btn btn-primary btn-lg mt-3">Iniciar</a>
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
