@@ -62,26 +62,60 @@ class clienteController extends Controller
 
 
     /**
-     * Show the form for editing the specified resource.
+     * Mostrar el formulario con los datos del cliente a editar
      */
     public function edit(string $id)
     {
-        //
+        $cliente = DB::table('clientes')->where('id', $id)->first();
+
+        return view('clientes_editar', compact('cliente'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualizar los datos del cliente en la base de datos
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        //Validaciones de datos de forms
+        $request->validate([
+            'txtnombre' => 'required|max:20',
+            'txtapellido' => 'required|max:50',
+            'txtcorreo' => 'required|email',
+            'txttelefono' => 'required|numeric|digits:8',
+
+        ]);
+
+        //Actualizad datos de la BD
+        DB::table('clientes')->where('id', $id)->update([
+            'nombre' => $request->input('txtnombre'),
+            'apellido' => $request->input('txtapellido'),
+            'correo' => $request->input('txtcorreo'),
+            'telefono' => $request->input('txttelefono'),
+            'updated_at' => now(),
+        ]);
+
+        session()->flash('exito', 'Se actualizo el cliente ');
+
+        //redirigir a la vista clientes
+        return redirect()->route('rutaclientes');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $cliente = DB::table('clientes')->where('id', $id)->first();
+
+        if (!$cliente) {
+            session()->flash('error', 'El cliente no existe.');
+            return redirect()->route('rutaclientes');
+        }
+
+        DB::table('clientes')->where('id', $id)->delete();
+
+        session()->flash('exito', 'El cliente se ha eliminado correctamente');
+
+        return redirect()->route('rutaclientes');
     }
 }

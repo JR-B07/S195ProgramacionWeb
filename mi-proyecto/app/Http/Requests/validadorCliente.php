@@ -25,7 +25,7 @@ class validadorCliente extends FormRequest
             'txtnombre' => 'required|max:20',
             'txtapellido' => 'required|max:50',
             'txtcorreo' => 'required|email',
-            'txttelefono' => 'required|numeric|digits_between:8,15'
+            'txttelefono' => 'required|numeric|min:8'
         ];
     }
 
@@ -45,7 +45,7 @@ class validadorCliente extends FormRequest
             'txtcorreo.email' => 'El correo debe ser una dirección válida',
             'txttelefono.required' => 'El teléfono es obligatorio',
             'txttelefono.numeric' => 'El teléfono debe contener solo números',
-            'txttelefono.digits_between' => 'El teléfono debe tener entre 8 y 15 dígitos'
+            'txttelefono.min' => 'El teléfono debe tener 8 numeros'
         ];
     }
 }

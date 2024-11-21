@@ -13,3 +13,9 @@ Route::get('/cliente/create', [clienteController::class, 'create'])->name('formu
 Route::post('/cliente', [clienteController::class, 'store'])->name('procesar');
 
 Route::get('/cliente', [clienteController::class, 'index'])->name('rutaclientes');
+
+Route::get('/cliente/{id}/edit', [clienteController::class, 'edit'])->name('clientes_editar');
+
+Route::put('/cliente/{id}', [clienteController::class, 'update'])->name('actualizar');
+
+Route::delete('/cliente/{id}', [clienteController::class, 'destroy'])->name('eliminar');
